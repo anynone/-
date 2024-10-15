@@ -1,3 +1,5 @@
+package flood_fill;
+
 import java.awt.*;
 
 /**

@@ -1,3 +1,5 @@
+package flood_fill;
+
 public class TestData {
     public static Integer[][] testData = new Integer[][]{
             {1,1,1,1,1,1,1,1,1,1,1,1},

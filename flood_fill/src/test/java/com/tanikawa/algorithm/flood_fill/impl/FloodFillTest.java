@@ -1,14 +1,17 @@
+package com.tanikawa.algorithm.flood_fill.impl;
+
+import flood_fill.DemoImpl;
+import flood_fill.TestData;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-class FloodFillTest {
+public class FloodFillTest {
 
     @Test
-    void searchRectPointTest() {
+     void searchRectPointTest() {
         // 实现类
         DemoImpl demo = new DemoImpl();
         // 结果
