@@ -1,7 +1,9 @@
 package com.tanikawa.algorithm.flood_fill.impl;
 
 import flood_fill.DemoImpl;
+import flood_fill.FloodFill;
 import flood_fill.TestData;
+import flood_fill.impl.ZhangYuHao;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -12,18 +14,26 @@ public class FloodFillTest {
 
     @Test
      void searchRectPointTest() {
-        // 实现类
-        DemoImpl demo = new DemoImpl();
+        // 实现类demo
+//        DemoImpl demo = new DemoImpl();
+        // 张育豪
+        FloodFill demo = new ZhangYuHao();
+
         // 结果
         boolean isRigth = checkResult(demo.searchRectPoint(TestData.testData, new Point(1, 1)));
         System.out.println("正确性检测： " + isRigth);
         //性能
+        long totalTime = 0L;
+        for (int j = 0; j < 10; j++) {
         long startMilli = System.currentTimeMillis();
-
-        for (int i = 0; i < 100000; i++) {
-            demo.searchRectPoint(TestData.testData, new Point(1, 1));
+            for (int i = 0; i < 10000000; i++) {
+                demo.searchRectPoint(TestData.testData, new Point(1, 1));
+            }
+            long durationMill = System.currentTimeMillis() - startMilli;
+            totalTime += durationMill;
         }
-        System.out.println(System.currentTimeMillis() - startMilli);
+
+        System.out.println("10次平均时间:" + (totalTime/10));
     }
 
     private boolean checkResult(Point[] testResult){
