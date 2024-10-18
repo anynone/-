@@ -1,8 +1,10 @@
-package flood_fill;
+package flood_fill.impl;
+
+import flood_fill.FloodFill;
 
 import java.awt.*;
 
-public class DemoImpl implements FloodFill{
+public class DemoImpl implements FloodFill {
     @Override
     public Point[] searchRectPoint(Integer[][] points, Point point) {
         // 单侧demo实现

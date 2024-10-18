@@ -1,7 +1,6 @@
 package com.tanikawa.algorithm.flood_fill.impl;
 
-import flood_fill.DemoImpl;
-import flood_fill.FloodFill;
+import flood_fill.impl.DemoImpl;
 import flood_fill.TestData;
 import org.junit.jupiter.api.Test;
 
