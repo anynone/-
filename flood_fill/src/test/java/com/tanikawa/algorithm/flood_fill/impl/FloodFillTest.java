@@ -3,6 +3,7 @@ package com.tanikawa.algorithm.flood_fill.impl;
 import flood_fill.DemoImpl;
 import flood_fill.FloodFill;
 import flood_fill.TestData;
+import flood_fill.impl.LiuRuYan;
 import flood_fill.impl.ZhangYuHao;
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +19,8 @@ public class FloodFillTest {
 //        DemoImpl demo = new DemoImpl();
         // 张育豪
         FloodFill demo = new ZhangYuHao();
+//        FloodFill demo = new LiuRuYan();
+
 
         // 结果
         boolean isRigth = checkResult(demo.searchRectPoint(TestData.testData, new Point(1, 1)));
