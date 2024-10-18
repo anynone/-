@@ -1,5 +1,6 @@
 package com.tanikawa.algorithm.flood_fill.impl;
 
+import flood_fill.DemoImpl;
 import flood_fill.FloodFill;
 import flood_fill.TestData;
 import org.junit.jupiter.api.Test;
@@ -13,9 +14,9 @@ public class FloodFillTest {
     @Test
      void searchRectPointTest() {
         // 实现类demo
-//        DemoImpl demo = new DemoImpl();
+        DemoImpl demo = new DemoImpl();
         // 张育豪
-        FloodFill demo = new ZhangYuHao();
+//        FloodFill demo = new ZhangYuHao();
 //        FloodFill demo = new LiuRuYan();
 
 
