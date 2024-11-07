@@ -1,10 +1,13 @@
 package com.tanikawa.algorithm.flood_fill.impl;
 
-import flood_fill.impl.DemoImpl;
+import com.sun.scenario.effect.Flood;
+import flood_fill.FloodFill;
+import flood_fill.impl.*;
 import flood_fill.TestData;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,21 +15,40 @@ public class FloodFillTest {
 
     @Test
      void searchRectPointTest() {
+
         // 实现类demo
-        DemoImpl demo = new DemoImpl();
+//        DemoImpl demo = new DemoImpl();
         // 张育豪
-//        FloodFill demo = new ZhangYuHao();
+        FloodFill demo = new ZhangYuHao();
 //        FloodFill demo = new LiuRuYan();
+//        FloodFill demo = new LiuWenJing();
+//        FloodFill demo = new WuZhiMin();
+//        FloodFill demo = new WangJinYang();
+//        FloodFill demo = new LiuWenJing();
+//        FloodFill demo = new HanLongGang();
 
 
         // 结果
-        boolean isRigth = checkResult(demo.searchRectPoint(TestData.testData, new Point(1, 1)));
-        System.out.println("正确性检测： " + isRigth);
+        boolean isRigth = true;
+        for (int i = 0; i < 10000; i++) {
+            Point randomPoint = getRandomPoint();
+            isRigth = checkResult(demo.searchRectPoint(TestData.testData, randomPoint), randomPoint);
+//            System.out.println("验证点：" + randomPoint + "," + "正确性检测:" +isRigth);
+            if (!isRigth){
+                System.out.println("未通过正确性检测");
+                System.exit(0);
+                break;
+            }
+        }
+
+        System.out.println("已通过正确性检测");
+        System.out.println("开始压测性能");
+//        System.exit(0);
         //性能
         long totalTime = 0L;
         for (int j = 0; j < 10; j++) {
         long startMilli = System.currentTimeMillis();
-            for (int i = 0; i < 10000000; i++) {
+            for (int i = 0; i < 100000; i++) {
                 demo.searchRectPoint(TestData.testData, new Point(1, 1));
             }
             long durationMill = System.currentTimeMillis() - startMilli;
@@ -36,21 +58,20 @@ public class FloodFillTest {
         System.out.println("10次平均时间:" + (totalTime/10));
     }
 
-    private boolean checkResult(Point[] testResult){
-        // 采样10个1，1位置正确的关键点
-        Set<String> rightPString = pointsToString(new Point[]{
-            new Point(1,2),new Point(3,5),new Point(2,9),new Point(3,10),new Point(10,3),
-            new Point(8,6),new Point(10,1),new Point(5,1),new Point(5,4),new Point(4,6),
-        });
-        // 采样10个1，1位置错误的关键点
-        Set<String> wrongPString = pointsToString(new Point[]{
-                new Point(1,0),new Point(4,2),new Point(4,11),new Point(11,10),new Point(8,2),
-                new Point(5,6),new Point(6,3),new Point(3,6),new Point(4,9),new Point(7,9),
-        });
+
+
+    private boolean checkResult(Point[] testResult, Point testPoint){
+        // 选取验证后的算法
+        WangJinYang wangJinYang = new WangJinYang();
+        Point[] rightPoint = wangJinYang.searchRectPoint(TestData.testData, testPoint);
         Set<String> testPString = pointsToString(testResult);
-        if (testPString.containsAll(rightPString) && testPString.stream().noneMatch(wrongPString::contains)){
+
+        if (testPString.containsAll(pointsToString(rightPoint))){
             return  true;
         }
+        System.out.println("检测点:" + testPoint);
+        System.out.println("待检测序列:" + new ArrayList<>(testPString));
+        System.out.println("正确序列：" + new ArrayList<>(pointsToString(rightPoint)));
         return false;
     }
 
@@ -61,5 +82,11 @@ public class FloodFillTest {
         }
 
         return pStr;
+    }
+
+    private Point getRandomPoint(){
+        double x = Math.random();
+        double y = Math.random();
+        return new Point((int)Math.round(x * 11), (int)Math.round(y * 11));
     }
 }
