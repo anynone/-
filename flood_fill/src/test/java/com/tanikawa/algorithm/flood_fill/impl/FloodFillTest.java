@@ -7,9 +7,7 @@ import flood_fill.TestData;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class FloodFillTest {
 
@@ -19,20 +17,20 @@ public class FloodFillTest {
         // 实现类demo
 //        DemoImpl demo = new DemoImpl();
         // 张育豪
-        FloodFill demo = new ZhangYuHao();
+//        FloodFill demo = new ZhangYuHao();
 //        FloodFill demo = new LiuRuYan();
 //        FloodFill demo = new LiuWenJing();
 //        FloodFill demo = new WuZhiMin();
 //        FloodFill demo = new WangJinYang();
-//        FloodFill demo = new LiuWenJing();
 //        FloodFill demo = new HanLongGang();
+        FloodFill demo = new XingZhiBin();
 
 
         // 结果
         boolean isRigth = true;
         for (int i = 0; i < 10000; i++) {
             Point randomPoint = getRandomPoint();
-            isRigth = checkResult(demo.searchRectPoint(TestData.testData, randomPoint), randomPoint);
+            isRigth = checkResult(demo.searchRectPoint(TestData.testData, randomPoint), randomPoint, false);
 //            System.out.println("验证点：" + randomPoint + "," + "正确性检测:" +isRigth);
             if (!isRigth){
                 System.out.println("未通过正确性检测");
@@ -60,12 +58,17 @@ public class FloodFillTest {
 
 
 
-    private boolean checkResult(Point[] testResult, Point testPoint){
+    private boolean checkResult(Point[] testResult, Point testPoint, boolean revert){
         // 选取验证后的算法
-        WangJinYang wangJinYang = new WangJinYang();
+        FloodFill wangJinYang = new HanLongGang();
         Point[] rightPoint = wangJinYang.searchRectPoint(TestData.testData, testPoint);
-        Set<String> testPString = pointsToString(testResult);
 
+        Set<String> testPString = null;
+        if (revert){
+            testPString = pointsToStringRev(testResult);
+        }else{
+            testPString = pointsToStringRev(testResult);
+        }
         if (testPString.containsAll(pointsToString(rightPoint))){
             return  true;
         }
@@ -76,10 +79,20 @@ public class FloodFillTest {
     }
 
     private Set<String> pointsToString(Point[] points){
-        HashSet<String> pStr = new HashSet<>();
+        TreeSet<String> pStr = new TreeSet<>();
         for (Point point : points) {
-            pStr.add(point.getX() + "," + point.getY());
+            pStr.add((int)point.getX() + "," + (int)point.getY());
         }
+
+        return pStr;
+    }
+
+    private Set<String> pointsToStringRev(Point[] points){
+        TreeSet<String> pStr = new TreeSet<>();
+        for (Point point : points) {
+            pStr.add((int)point.getY() + "," + (int)point.getX());
+        }
+
 
         return pStr;
     }
