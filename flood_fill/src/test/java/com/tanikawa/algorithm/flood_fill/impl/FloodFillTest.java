@@ -17,20 +17,20 @@ public class FloodFillTest {
         // 实现类demo
 //        DemoImpl demo = new DemoImpl();
         // 张育豪
-//        FloodFill demo = new ZhangYuHao();
+        FloodFill demo = new ZhangYuHao();
 //        FloodFill demo = new LiuRuYan();
 //        FloodFill demo = new LiuWenJing();
 //        FloodFill demo = new WuZhiMin();
 //        FloodFill demo = new WangJinYang();
 //        FloodFill demo = new HanLongGang();
-        FloodFill demo = new XingZhiBin();
+//        FloodFill demo = new XingZhiBin();
 
 
         // 结果
         boolean isRigth = true;
         for (int i = 0; i < 10000; i++) {
             Point randomPoint = getRandomPoint();
-            isRigth = checkResult(demo.searchRectPoint(TestData.testData, randomPoint), randomPoint, false);
+            isRigth = checkResult(demo.searchRectPoint(TestData.testData, randomPoint), randomPoint, true);
 //            System.out.println("验证点：" + randomPoint + "," + "正确性检测:" +isRigth);
             if (!isRigth){
                 System.out.println("未通过正确性检测");
@@ -65,7 +65,7 @@ public class FloodFillTest {
 
         Set<String> testPString = null;
         if (revert){
-            testPString = pointsToStringRev(testResult);
+            testPString = pointsToString(testResult);
         }else{
             testPString = pointsToStringRev(testResult);
         }
